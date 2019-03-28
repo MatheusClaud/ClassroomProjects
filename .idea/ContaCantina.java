@@ -27,10 +27,4 @@ public class ContaCantina {
     public String toString(){
         return nome + " " + quantidade + " " + gastosTotais;
     }
-
-
-
-
-
-
 }
