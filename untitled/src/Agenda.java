@@ -1,26 +1,34 @@
-import java.util.Arrays;
+package Projeto;
+
 
 public class Agenda {
 
     private Contato[] contatos = new Contato[101];
+    private int contatosCriados = 0;
 
     public void cadastraContato(int indice, String nome, String sobrenome, String telefone){
         contatos[indice] = new Contato(nome, sobrenome, telefone);
+        contatosCriados++;
 
     }
 
     public String[] getListaContatos(){
 
-        String[] str = new String[100];
-        int indice = 0;
+    	
+    	if (contatosCriados == 0) { 
+    		String[] str = {" "};
+    		return str;
+    	}
+    	
+    	String[] str = new String[contatosCriados];
+    	
+    	int indice = 0;
         for (int i = 1; i <= contatos.length; i++){
-            if (contatos[i].contatoAtivo()){
-                str[indice] = i + " - " + contatos[i].getNomeCompleto();
-                indice++;
+            if (!contatos[i].contatoVazio()){
+            	str[indice] = i + " - " + contatos[i].getNomeCompleto();
+            	indice++;
             }
         }
-
-        str = Arrays.copyOf(str, indice);
 
         return str;
     }

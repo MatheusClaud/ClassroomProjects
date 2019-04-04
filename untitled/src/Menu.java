@@ -1,3 +1,5 @@
+package Projeto;
+
 import java.util.Scanner;
 
 public class Menu {
@@ -18,11 +20,20 @@ public class Menu {
 
         agenda = new Agenda();
     }
+    
+    public void exibeMenu(){
+    	for (int i = 0; i < opcao.length; i++) {
+    		System.out.println(opcao[i].toString());
+    	}
+    	System.out.print("\nOpção> ");
+    	
+    }
 
 
 
-    public boolean redireciona(String opcao){
-
+    public boolean redireciona(){
+    	
+    	String opcao = s.next();
 
         switch (opcao){
             case "C":
@@ -30,40 +41,45 @@ public class Menu {
                 System.out.println("\nPosição: ");
 
                 indice = s.nextInt();
-                if (!agenda.indiceValido(indice){
+                if (!agenda.indiceValido(indice)){
                     System.out.println(invalido);
                     return true;
                 }
 
                 System.out.println("\nNome: ");
-                String nome = s.nextLine();
+                String nome = s.next();
 
-                System.out.println("\nSobrenome: ");
-                String sobrenome = s.nextLine();
+                
+                System.out.println("Sobrenome: ");
+                String sobrenome = s.next();
 
-                System.out.println("\nTelefone: ");
-                String telefone = s.nextLine();
+                System.out.println("Telefone: ");
+                String telefone = s.next();
 
                 agenda.cadastraContato(indice, nome, sobrenome, telefone);
 
-                System.out.println("\nCADASTRO REALIZADO");
+                System.out.println("\nCADASTRO REALIZADO!");
+                return true;
 
             case "L":
                 String[] str =  agenda.getListaContatos();
-                for (int i = 0; i <= str.length; i++){
-                    System.out.println("\n"+str[i]);
+                
+                for (int i = 0; i < str.length; i++){
+                    System.out.print("\n"+str[i]);
                 }
+                return true;
 
             case "E":
                 System.out.println("\nContato: ");
 
                 indice = s.nextInt();
-                if (!agenda.indiceValido(indice){
-                System.out.println("POSIÇÃO INVÁLIDA!");
-                return true;
+                if (!agenda.indiceValido(indice)){
+                	System.out.println("POSIÇÃO INVÁLIDA!");
+                	return true;
+                }
 
                 System.out.println(agenda.getContato(indice));
-            }
+                return true;
 
             case "S":
 
@@ -75,7 +91,7 @@ public class Menu {
 
     }
 
-    public boolean beOption(String opcao){
+    public boolean eOpcao(String opcao){
 
         for (int i = 0; i < this.opcao.length; i++){
             if (this.opcao[i].equals(opcao)) return true;
